@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
 });
 
 // http://localhost:9200/list-apis
-// https://hashdefineapi.herokuapp.com/list-apis
+// https://hash-define-api.herokuapp.com/list-apis
 app.get('/list-apis', (req, res) => {
     db.listCollections().toArray((err, collInfo) => {
         if (err) throw err;
@@ -180,7 +180,7 @@ app.post('/setCertTypeEthValues', (req, res) => {
     //     "validTill": "2 years"
     // }
 // http://localhost:9200/certificate/add
-// https://hashdefineapi.herokuapp.com/certificate/add
+// https://hash-define-api.herokuapp.com/certificate/add
 
 app.post('/addCertificates', (req, res) => {
     let email = req.body.email;

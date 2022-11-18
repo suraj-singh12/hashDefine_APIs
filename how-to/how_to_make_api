@@ -1,0 +1,42 @@
+1) collect data in json files
+  a. 1 json file for each type of data (like for clothes -> clothes.json, for keyboards -> keyboards.json)
+2) make a mongodb database locally
+3) make collections with the json file names; and store data in respective collections
+4) make an empty repo, and push it on github, everything we do in this repo from now,
+   do `npm init` in current folder, install packages mentioned in my `package.json` using `npm i package_name` , 
+   create a .gitignore same as here, create an api document,  
+   now make app.js and make routes using express to make APIs
+5) create .env file and put PORT, MongoURL, MongoLiveUrl(will fill value later in this one) there
+   write all code to make the apis as here we have (i.e. all files as in this dir structure (except this).
+6) then run the apis locally using `npm run dev`
+   and test each one of them using postman
+
+7) when the apis are running locally perfectly then -> 
+8) go to mongodb website, sign in, create a cluster (free one) if you don't have a cluster
+9) and then setup ip as 0.0.0.0/0 and username: alpha, password: alpha123  (don't use any special char in password, it creates problems in connecting using code later on)
+10) go to dashboard and create a database (same as that on your local mongodb database)
+11) create same collections, and add data to them in same way as done in local db
+12) after this done, go to dashboard, and click connect > connect my application; copy the url, and paste in .env file as value of MongoLiveUrl
+13) change the <password> in the url you pasted to alpha123 (as we had set earlier)
+14) go to app.js and change the mongoUrl value to process.env.MongoLiveUrl
+15) if you have a different name of database (that we created in step 10) than the local one, then change database name in app.js
+    in the line db = client.db(yourDatabase) to the one in your cloud database (mongodb website one)
+16) now run the apis again, and ensure they are working perfectly
+    test them well using postman
+
+17) if all working fine, then ensure you pushed your all code to github using commands
+`git add .`      `git commit -m 'your message'`         `git push origin main`
+18) go to heroku and sign in,
+19) create a new app, give any name and create. Go to deploy > click on `Connect to Github` > then search for your repo (in which we did all work and pushed on github)
+20) connect that repo, click main branch, and hit `deploy branch`.
+21) after this go to settings and click `reveal config vars` 
+22) add your .env file variables with their values (exactly same names/values as in env file)
+23) then go to deploy, and hit `deploy branch` button 
+24) app will get deployed, you will get a message like : 'Your app was successfully deployed.'
+25) click `View` below it to reach to see. If page loads successfully and is as expected, then your app is working fine.
+26) the part http://localhost:port_no   will get replaced by   https://your_app_name.herokuapp.com  in live api when you use
+27) now test your live api using postman and ensure it's working fine !
+28) you are done then! Good Job! 
+
+NOTE: Now every-time you make any change to your `app.js`, you need to go to heroku, sign in and go to your app, and deploy the main branch again.
+if you make any change to your .env file, you need to add/remove the same in `config vars` in settings of your heroku app. 

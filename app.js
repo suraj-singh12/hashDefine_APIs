@@ -7,8 +7,8 @@ let port = process.env.PORT || 8500;
 
 let mongo = require('mongodb');
 let MongoClient = mongo.MongoClient;
-// let mongoUrl = process.env.MongoUrl;     // local url
-let mongoUrl = process.env.MongoLiveUrl;   // live url
+let mongoUrl = process.env.MongoUrl;     // local url
+// let mongoUrl = process.env.MongoLiveUrl;   // live url
 let db;
 
 //middleware
@@ -247,7 +247,7 @@ app.get('/getCertificates', (req, res) => {
 
 
 // update the db with eth value based on email
-// https://hash-define-api.herokuapp.com/updateEthValue?email=sayan@gmail.com&ethValues=[0.1,0.4]
+// https://hash-define-api.herokuapp.com/updateEthValue?email=sayan@gmail.com&ethValues=[0.1,0.4,0,0]
 app.post('/updateEthValue', (req, res) => {
     let email = req.query.email;
     let ethValues = req.query.ethValues;

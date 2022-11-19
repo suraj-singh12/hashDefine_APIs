@@ -7,8 +7,8 @@ let port = process.env.PORT || 8500;
 
 let mongo = require('mongodb');
 let MongoClient = mongo.MongoClient;
-let mongoUrl = process.env.MongoUrl;     // local url
-// let mongoUrl = process.env.MongoLiveUrl;   // live url
+// let mongoUrl = process.env.MongoUrl;     // local url
+let mongoUrl = process.env.MongoLiveUrl;   // live url
 let db;
 
 //middleware
@@ -214,7 +214,7 @@ app.post('/addCertificates', (req, res) => {
                 }, (err, result) => {
                 if(err) throw err;
                 // res.send(result);
-                res.status(200).send(`Order ${orderId} Updated`);
+                res.status(200).send(`Order Updated`);
             });
             res.send('data appended!!')
         }

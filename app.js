@@ -234,9 +234,8 @@ app.post('/addCertificates', (req, res) => {
 
 app.get('/getCertificates', (req, res) => {
     let email = req.query.email;
-    let query = {email: email};
 
-    db.collection('certificates').find(query).toArray((err, result) => {
+    db.collection('certificates').find({}).toArray((err, result) => {
         if(err) throw err;
         if(result.length > 0) {
             res.send(result);

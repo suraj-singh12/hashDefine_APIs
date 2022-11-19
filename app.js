@@ -268,7 +268,7 @@ app.post('/updateEthValue', (req, res) => {
                 {email: email},
                 {
                     $set:{
-                        "ethValues": ethValues
+                        "ethValues": newValues
                     }
                 }, (err, result) => {
                 if(err) throw err;
@@ -281,6 +281,8 @@ app.post('/updateEthValue', (req, res) => {
     })
     // res.send('data appended!!')
 });
+
+
 
 // connect to database
 MongoClient.connect(mongoUrl, (err, client) => {

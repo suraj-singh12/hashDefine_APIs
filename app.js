@@ -252,17 +252,33 @@ app.post('/updateEthValue', (req, res) => {
     let email = req.query.email;
     let ethValues = req.query.ethValues;
 
-    db.collection('certificates').updateOne(
-        {email: email},
-        {
-            $set:{
-                "ethValues": ethValues
-            }
-        }, (err, result) => {
+    db.collection('certificates').find({email: email}).toArray((err, result) => {
         if(err) throw err;
-        // res.send(result);
-        res.status(200).send(`Eth values Updated`);
-    });
+        if(result.length > 0) {
+            newValues = "";
+            if(result[0].ethValues) {
+                tmp = JSON.parse('[' + result[0].ethValues + ']');
+                ethValues = JSON.parse('[' + ethValues + ']');
+                newValues = [tmp[0] + ethValues[0], tmp[1] + ethValues[1], tmp[2] + ethValues[2], tmp[3] + ethValues[3]];
+            } else {
+                newValues = JSON.parse('[' + ethValues + ']');
+            }
+
+            db.collection('certificates').updateOne(
+                {email: email},
+                {
+                    $set:{
+                        "ethValues": ethValues
+                    }
+                }, (err, result) => {
+                if(err) throw err;
+                // res.send(result);
+                res.status(200).send(`Eth values Updated`);
+            });
+        } else {
+            res.send({message: 'No data found'});
+        }
+    })
     // res.send('data appended!!')
 });
 

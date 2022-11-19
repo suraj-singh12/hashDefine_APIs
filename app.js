@@ -37,7 +37,7 @@ app.get('/list-apis', (req, res) => {
 });
 
 // getEth Values of an existing organization
-// http://localhost:9200/getEthValues?orgName=Google
+// http://localhost:9200/getOrgEthValues?orgName=Google
 app.get('/getOrgEthValues', (req, res) => {
     let orgName = req.query.orgName;
     let query = { orgName: orgName };
@@ -245,6 +245,26 @@ app.get('/getCertificates', (req, res) => {
     })
 });
 
+
+// update the db with eth value based on email
+// https://hash-define-api.herokuapp.com/updateEthValue
+app.post('/updateEthValue', (req, res) => {
+    let email = req.query.email;
+    let ethValues = req.query.ethValue;
+
+    db.collection('certificates').updateOne(
+        {email: email},
+        {
+            $set:{
+                "ethValues": ethValues
+            }
+        }, (err, result) => {
+        if(err) throw err;
+        // res.send(result);
+        res.status(200).send(`Eth values Updated`);
+    });
+    res.send('data appended!!')
+});
 
 // connect to database
 MongoClient.connect(mongoUrl, (err, client) => {

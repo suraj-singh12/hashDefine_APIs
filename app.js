@@ -247,10 +247,10 @@ app.get('/getCertificates', (req, res) => {
 
 
 // update the db with eth value based on email
-// https://hash-define-api.herokuapp.com/updateEthValue
+// https://hash-define-api.herokuapp.com/updateEthValue?email=sayan@gmail.com&ethValues=[0.1,0.4]
 app.post('/updateEthValue', (req, res) => {
     let email = req.query.email;
-    let ethValues = req.query.ethValue;
+    let ethValues = req.query.ethValues;
 
     db.collection('certificates').updateOne(
         {email: email},

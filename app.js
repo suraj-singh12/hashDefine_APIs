@@ -81,7 +81,7 @@ app.post('/setOrgEthValues', (req, res) => {
 
 
 // getEth Values of an organizationType
-// http://localhost:9200/getOrgTypeEthValues?type=tech
+// http://localhost:9200/getOrgTypeEthValues?orgType=tech
 app.get('/getOrgTypeEthValues', (req, res) => {
     let orgType = req.query.orgType;
     let query = { orgType: orgType };
@@ -179,8 +179,8 @@ app.post('/setCertTypeEthValues', (req, res) => {
     //     "timeDuration": "2 months",
     //     "validTill": "2 years"
     // }
-// http://localhost:9200/certificate/add
-// https://hash-define-api.herokuapp.com/certificate/add
+// http://localhost:9200/addCertificates
+// https://hash-define-api.herokuapp.com/addCertificates
 
 app.post('/addCertificates', (req, res) => {
     let email = req.body.email;
@@ -228,6 +228,24 @@ app.post('/addCertificates', (req, res) => {
         }
     })
 });
+
+// getCertificate api
+// https://hash-define-api.herokuapp.com/getCertificates
+
+app.get('/getCertificates', (req, res) => {
+    let email = req.query.email;
+    let query = {email: email};
+
+    db.collection('certificates').find(query).toArray((err, result) => {
+        if(err) throw err;
+        if(result.length > 0) {
+            res.send(result);
+        } else {
+            res.send({message: 'No data found'});
+        }
+    })
+});
+
 
 // connect to database
 MongoClient.connect(mongoUrl, (err, client) => {

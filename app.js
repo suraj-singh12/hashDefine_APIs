@@ -263,7 +263,7 @@ app.post('/updateEthValue', (req, res) => {
         // res.send(result);
         res.status(200).send(`Eth values Updated`);
     });
-    res.send('data appended!!')
+    // res.send('data appended!!')
 });
 
 // connect to database
